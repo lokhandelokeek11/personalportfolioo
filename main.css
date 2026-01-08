@@ -10,23 +10,20 @@
 /* Modern Color Palette - Midnight Aurora */
 /* Modern Black & White Monochrome Theme */
 :root { 
-  /* Light Mode Variables (Default) */
-  --background-color: #ffffff; 
-  --default-color: #2e2e2e; 
-  --heading-color: #000000; 
-  --accent-color: #000000; 
-  --surface-color: #ffffff;
-  --contrast-color: #ffffff;
-}
-
-/* Nav Menu Colors */
-:root {
-  --nav-color: #333333; 
-  --nav-hover-color: #000000; 
-  --nav-mobile-background-color: #ffffff; 
-  --nav-dropdown-background-color: #ffffff; 
-  --nav-dropdown-color: #333333; 
-  --nav-dropdown-hover-color: #000000; 
+  /* Default to Dark Mode Variables */
+  --background-color: #000000; 
+  --default-color: #e0e0e0; 
+  --heading-color: #ffffff; 
+  --accent-color: #ffffff; 
+  --surface-color: #121212;
+  --contrast-color: #000000;
+  
+  --nav-color: #e0e0e0; 
+  --nav-hover-color: #ffffff; 
+  --nav-mobile-background-color: #000000; 
+  --nav-dropdown-background-color: #121212; 
+  --nav-dropdown-color: #cccccc; 
+  --nav-dropdown-hover-color: #ffffff; 
 }
 
 body {
@@ -35,9 +32,26 @@ body {
   font-family: var(--default-font);
 }
 
-.light-background {
-  --background-color: #f5f5f5; 
+/* Light Mode Overrides (if toggled) */
+body.light-mode {
+  --background-color: #ffffff; 
+  --default-color: #2e2e2e; 
+  --heading-color: #000000; 
+  --accent-color: #000000; 
   --surface-color: #ffffff;
+  --contrast-color: #ffffff;
+  
+  --nav-color: #333333; 
+  --nav-hover-color: #000000; 
+  --nav-mobile-background-color: #ffffff; 
+  --nav-dropdown-background-color: #ffffff; 
+  --nav-dropdown-color: #333333; 
+  --nav-dropdown-hover-color: #000000; 
+}
+
+.light-background {
+  --background-color: #121212; 
+  --surface-color: #1e1e1e;
 }
 
 .dark-background {
@@ -48,26 +62,9 @@ body {
   --contrast-color: #000000;
 }
 
-/* Dark Mode Overrides */
-body.dark-mode {
-  --background-color: #000000;
-  --default-color: #e0e0e0;
-  --heading-color: #ffffff;
-  --accent-color: #ffffff;
-  --surface-color: #121212;
-  --contrast-color: #000000;
-  
-  --nav-color: #e0e0e0;
-  --nav-hover-color: #ffffff;
-  --nav-mobile-background-color: #000000;
-  --nav-dropdown-background-color: #121212;
-  --nav-dropdown-color: #cccccc;
-  --nav-dropdown-hover-color: #ffffff;
-}
-
-body.dark-mode .light-background {
-  --background-color: #121212;
-  --surface-color: #1e1e1e;
+body.light-mode .light-background {
+    --background-color: #f5f5f5; 
+    --surface-color: #ffffff;
 }
 
 /* Remove Body Dark Mode Class Logic since global is dark now */
@@ -2901,20 +2898,30 @@ section,
 --------------------------------------------------------------*/
 /* Minimalist & Readable Design */
 
+/* Minimalist & Readable Design */
+
 /* General Typography Updates */
 body {
-  font-size: 1.1rem; /* Base size increase */
+  font-size: 1.1rem; 
   line-height: 1.8;
   letter-spacing: 0.02em;
+  padding-top: 80px; /* Ensure content is not hidden behind fixed header */
+}
+
+/* Fallback for Bootstrap Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
 }
 
 p, li, span, a {
-  font-weight: 300; /* Lighter weight for cleaner look */
+  font-weight: 400; /* Increased weight for readability */
 }
 
 /* Headings - Simple & Large */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.02em;
   margin-bottom: 1.2rem;
   color: var(--heading-color);
@@ -2929,13 +2936,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .section-title h2::after {
-  display: none; /* Remove underline decoration */
+  display: none; 
 }
 
 /* Service Details (Project Details) - High Readability */
 .service-details p, 
 .service-details ul li {
-  font-size: 1.35rem; /* Large font size for readability */
+  font-size: 1.25rem; /* Balanced size */
   line-height: 1.9;
   color: var(--default-color);
   margin-bottom: 1.5rem;
@@ -2946,6 +2953,56 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 3rem;
   margin-bottom: 1.5rem;
   font-weight: 700;
+}
+
+/* Hero Section Updates - Robust Layout */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh; /* Adjust height */
+  padding-top: 40px;
+}
+
+/* Ensure Row behaves as Flex Container even if Bootstrap fails */
+.hero .row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+}
+
+/* Ensure Columns take proper width */
+.hero .col-lg-6 {
+  flex: 1;
+  min-width: 300px; /* Prevent squashing on mobile */
+  padding: 15px;
+}
+
+.hero-content {
+  padding-right: 20px;
+}
+
+.hero-image {
+  display: flex;
+  justify-content: center;
+}
+
+.hero h1 {
+  font-size: 4rem; 
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -2px;
+}
+
+.hero img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
+  /* Ensure image behaves well even without bootstrap */
+  max-height: 500px; 
 }
 
 /* Cards - Minimalist, No Borders (or very subtle) */
@@ -2990,7 +3047,7 @@ body.dark-mode .service-item:hover {
 
 /* Hero Section */
 .hero h1 {
-  font-size: 5rem; /* Very large hero text */
+  font-size: 4rem; /* Reduced from 5rem for better balance */
   font-weight: 900;
   line-height: 1.1;
   letter-spacing: -2px;
